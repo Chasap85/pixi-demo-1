@@ -22,6 +22,13 @@ export const Config = {
             max: 200
         }
     },
+    powerUp: {
+        chance: 0.5,
+        offset: {
+            min: 100,
+            max: 500,
+        }
+    },
     platforms: {
         moveSpeed: -1.5,
         ranges: {
