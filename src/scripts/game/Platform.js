@@ -77,7 +77,7 @@ export class Platform {
     }
 
     createPowerUps() {
-        if (Math.random() < .8) {
+        if (Math.random() < .4) {
             const x = this.tileSize * Math.floor(Math.random() * this.cols);
             const y = App.config.powerUp.offset.min +
                 Math.random() * (App.config.powerUp.offset.max - App.config.powerUp.offset.min);
