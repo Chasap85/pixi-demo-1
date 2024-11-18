@@ -4,7 +4,7 @@ import * as Matter from 'matter-js';
 import { App } from '../system/App';
 
 export class PowerUp {
-    constructor(x, y, type = 'magnetic') {
+    constructor(x, y) {
         this.createSprite(x, y);
         // this.createBody();
         this.createAnimation();
@@ -40,8 +40,6 @@ export class PowerUp {
         this.indicator.visible = true;
         this.indicator.alpha = 0;
     }
-
-    diactivate() { }
 
     createBody() {
         this.body = Matter.Bodies.circle(
