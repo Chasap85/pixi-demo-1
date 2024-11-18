@@ -4,6 +4,7 @@ import { App } from '../system/App';
 import { Background } from "./Background";
 import { Scene } from '../system/Scene';
 import { Hero } from "./Hero";
+import { PowerUp } from './PowerUp';
 import { Platforms } from "./Platforms";
 
 export class GameScene extends Scene {
@@ -34,6 +35,7 @@ export class GameScene extends Scene {
         const colliders = [event.pairs[0].bodyA, event.pairs[0].bodyB];
         const hero = colliders.find(body => body.gameHero);
         const platform = colliders.find(body => body.gamePlatform);
+        const powerUp = colliders.find(body => body.gamePowerUp);
 
         if (hero && platform) {
             this.hero.stayOnPlatform(platform.gamePlatform);
@@ -43,6 +45,10 @@ export class GameScene extends Scene {
 
         if (hero && diamond) {
             this.hero.collectDiamond(diamond.gameDiamond);
+        }
+
+        if (hero && powerUp){
+            this.hero.activatePowerUp(powerUp.gamePowerUp);
         }
     }
 
@@ -68,13 +74,13 @@ export class GameScene extends Scene {
     }
 
     createPlatforms() {
-        this.platfroms = new Platforms();
-        this.container.addChild(this.platfroms.container);
+        this.platforms = new Platforms();
+        this.container.addChild(this.platforms.container); //fix typo 
     }
 
     update(dt) {
         this.bg.update(dt);
-        this.platfroms.update(dt);
+        this.platforms.update(dt);
     }
 
     destroy() {
@@ -82,7 +88,7 @@ export class GameScene extends Scene {
         App.app.ticker.remove(this.update, this);
         this.bg.destroy();
         this.hero.destroy();
-        this.platfroms.destroy();
+        this.platforms.destroy();
         this.labelScore.destroy();
     }
 }
