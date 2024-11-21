@@ -25,6 +25,7 @@ export const Config = {
     powerUp: {
         chance: 0.5,
         duration: 5000,
+        radius: 300,
         offset: {
             min: 100,
             max: 500,
