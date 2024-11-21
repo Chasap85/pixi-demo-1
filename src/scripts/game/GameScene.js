@@ -4,7 +4,6 @@ import { App } from '../system/App';
 import { Background } from "./Background";
 import { Scene } from '../system/Scene';
 import { Hero } from "./Hero";
-import { PowerUp } from './PowerUp';
 import { Platforms } from "./Platforms";
 
 export class GameScene extends Scene {
@@ -75,7 +74,7 @@ export class GameScene extends Scene {
 
     createPlatforms() {
         this.platforms = new Platforms();
-        this.container.addChild(this.platforms.container); //fix typo 
+        this.container.addChild(this.platforms.container);
     }
 
     update(dt) {
@@ -90,5 +89,6 @@ export class GameScene extends Scene {
         this.hero.destroy();
         this.platforms.destroy();
         this.labelScore.destroy();
+        App.diamondManager.destroy();
     }
 }

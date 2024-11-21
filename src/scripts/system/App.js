@@ -4,6 +4,7 @@ import { gsap } from "gsap";
 import { PixiPlugin } from "gsap/PixiPlugin";
 import { Loader } from "./Loader";
 import { ScenesManager } from "./ScenesManager";
+import { DiamondManager } from '../game/DiamondManager';
 
 class Application {
     run(config) {
@@ -24,6 +25,7 @@ class Application {
 
         // [06]
         this.createPhysics();
+        this.diamondManager = new DiamondManager();
     }
 
     createPhysics() {

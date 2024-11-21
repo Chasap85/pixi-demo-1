@@ -45,6 +45,7 @@ export class Platform {
         this.container.addChild(diamond.sprite);
         diamond.createBody();
         this.diamonds.push(diamond);
+        App.diamondManager.addDiamond(diamond);
     }
     // [/10]
 
