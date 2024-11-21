@@ -15,12 +15,20 @@ export class Diamond {
 
     update() {
         if (this.sprite) {
-            Matter.Body.setPosition(this.body, {x: this.sprite.width / 2 + this.sprite.x + this.sprite.parent.x, y: this.sprite.height / 2 + this.sprite.y + this.sprite.parent.y});
+            const diamondX = this.sprite.width / 2 + this.sprite.x + this.sprite.parent.x;
+            const diamondY = this.sprite.height / 2 + this.sprite.y + this.sprite.parent.y;
+
+            Matter.Body.setPosition(this.body, { x: diamondX, y: diamondY });
+
+            if (diamondX < -this.sprite.width) {
+                this.destroy();
+                return;
+            }
         }
     }
 
     createBody() {
-        this.body = Matter.Bodies.rectangle(this.sprite.width / 2 + this.sprite.x + this.sprite.parent.x, this.sprite.height / 2 + this.sprite.y + this.sprite.parent.y, this.sprite.width, this.sprite.height, {friction: 0, isStatic: true, render: { fillStyle: '#060a19' }});
+        this.body = Matter.Bodies.rectangle(this.sprite.width / 2 + this.sprite.x + this.sprite.parent.x, this.sprite.height / 2 + this.sprite.y + this.sprite.parent.y, this.sprite.width, this.sprite.height, { friction: 0, isStatic: true, render: { fillStyle: '#060a19' } });
         this.body.isSensor = true;
         this.body.gameDiamond = this;
         Matter.World.add(App.physics.world, this.body);
@@ -32,6 +40,7 @@ export class Diamond {
             App.app.ticker.remove(this.update, this);
             Matter.World.remove(App.physics.world, this.body);
             this.sprite.destroy();
+            App.diamondManager.removeDiamond(this.sprite)
             this.sprite = null;
         }
     }
